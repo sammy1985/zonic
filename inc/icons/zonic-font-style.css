@@ -267,6 +267,9 @@
 .icon-github:before {
   content: "\eab0";
 }
+.icon-wordpress:before {
+  content: "\eab4";
+}
 .icon-blogger:before {
   content: "\eab7";
 }

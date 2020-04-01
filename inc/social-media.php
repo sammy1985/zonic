@@ -1,3 +1,10 @@
+<?php
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
+
 <ul id="shm-social-icons">
 					
 					<?php if(get_theme_mod( 'social_icon_fb') !== '') { ?>
@@ -12,7 +19,7 @@
 					<?php }
 
 					if(get_theme_mod( 'social_icon_yt') !== '') { ?>
-						<li><a target="_blank" href="<?php echo esc_url(get_theme_mod( 'social_icon_yt' )); ?>"><span class="icon-youtube"></span></a></li>
+						<li><a target="_blank" href="<?php echo esc_url(get_theme_mod( 'social_icon_yt2' )); ?>"><span class="icon-youtube"></span></a></li>
 					<?php }
 
 					if(get_theme_mod( 'social_icon_pi') !== '') { ?>

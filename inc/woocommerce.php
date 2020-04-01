@@ -15,6 +15,12 @@
  *
  * @return void
  */
+
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 function zonic_woocommerce_setup() {
 	add_theme_support( 'woocommerce' );
 	add_theme_support( 'wc-product-gallery-zoom' );

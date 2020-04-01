@@ -5,18 +5,31 @@
  * @package zonic
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( !function_exists('zonic_setup') ):
 
     function zonic_setup()
     {
 
-        load_theme_textdomain('zonic', get_template_directory() . '/languages');
+        load_theme_textdomain( 'zonic', get_template_directory() . '/languages' );
 
-        add_theme_support('automatic-feed-links');
+        add_theme_support( 'automatic-feed-links' );
 
-        add_theme_support('title-tag');
+        add_theme_support( 'title-tag' );
 
-        add_theme_support('post-thumbnails');
+        add_theme_support( 'post-thumbnails' );
+
+        add_theme_support( 'align-wide' );
+
+        add_theme_support( 'woocommerce' );
+
+        add_theme_support( 'editor-styles' );
+
+        add_editor_style( 'editor-style.css' );
 
         register_nav_menus(array(
             'menu-1' => esc_html__('Primary', 'zonic') ,
@@ -46,11 +59,6 @@ if ( !function_exists('zonic_setup') ):
         ));
 
         add_editor_style('css/editor-style.css');
-
-        /**
-        * Support for Gutenberg wide images
-        */
-        add_theme_support( 'align-wide' );
 
     }
 endif;
@@ -121,56 +129,7 @@ function zonic_scripts()
     wp_enqueue_style('zonic-style', get_stylesheet_uri());
     wp_enqueue_style('custom', get_template_directory_uri() . '/css/custom.css');
     wp_enqueue_style('zonic-icons', get_template_directory_uri() . '/inc/icons/zonic-font-style.css');
-
-    if (get_theme_mod('custom_body_font_family') == 'lato')
-    {
-        wp_enqueue_style('lato', 'https://fonts.googleapis.com/css?family=Lato&display=swap');
-    }
-
-    elseif (get_theme_mod('custom_body_font_family') == 'montserrat')
-    {
-        wp_enqueue_style('montserrat', 'https://fonts.googleapis.com/css?family=Montserrat&display=swap');
-    }
-
-    elseif (get_theme_mod('custom_body_font_family') == 'roboto')
-    {
-        wp_enqueue_style('roboto', 'https://fonts.googleapis.com/css?family=Roboto&display=swap');
-    }
-
-    elseif (get_theme_mod('custom_body_font_family') == 'ubuntu')
-    {
-        wp_enqueue_style('ubuntu', 'https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
-    }
-
-    elseif (get_theme_mod('custom_body_font_family') == 'default')
-    {
-        wp_enqueue_style('default', 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap');
-    }
-
-    if (get_theme_mod('custom_title_font_family') == 'lato')
-    {
-        wp_enqueue_style('lato', 'https://fonts.googleapis.com/css?family=Lato&display=swap');
-    }
-
-    elseif (get_theme_mod('custom_title_font_family') == 'montserrat')
-    {
-        wp_enqueue_style('montserrat', 'https://fonts.googleapis.com/css?family=Montserrat&display=swap');
-    }
-
-    elseif (get_theme_mod('custom_title_font_family') == 'roboto')
-    {
-        wp_enqueue_style('roboto', 'https://fonts.googleapis.com/css?family=Roboto&display=swap');
-    }
-
-    elseif (get_theme_mod('custom_title_font_family') == 'ubuntu')
-    {
-        wp_enqueue_style('ubuntu', 'https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
-    }
-
-    elseif (get_theme_mod('custom_title_font_family') == 'default')
-    {
-        wp_enqueue_style('default', 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap');
-    }
+    wp_enqueue_style( 'noto-sans-fonts', 'https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap', false );
 
     wp_enqueue_script('zonic-navigation', get_template_directory_uri() . '/js/navigation.js', array() , '20151215', true);
 
@@ -200,6 +159,24 @@ if (class_exists('WooCommerce'))
 {
     require get_template_directory() . '/inc/woocommerce.php';
 }
+
+/** 
+ * Completely Remove jQuery From WordPress 
+
+function zonic_init() {
+    if (!is_admin()) {
+        wp_deregister_script('jquery');
+        wp_register_script('jquery', false);
+    }
+}
+add_action('init', 'zonic_init');
+
+add_action('wp_enqueue_scripts', 'no_more_jquery');
+function no_more_jquery(){
+    wp_deregister_script('jquery');
+}
+
+ */
 
 /**
  * Excert leangth
@@ -231,12 +208,12 @@ remove_action('wp_print_styles', 'print_emoji_styles');
  */
 function the_breadcrumb()
 {
-    $showOnHome = 0; // 1 - show breadcrumbs on the homepage, 0 - don't show
-    $delimiter = '&raquo;'; // delimiter between crumbs
-    $home = '<img src="' . get_template_directory_uri() . '/inc/icons/home_bc_link.svg">'; // text for the 'Home' link
-    $showCurrent = 1; // 1 - show current post/page title in breadcrumbs, 0 - don't show
-    $before = '<span class="current">'; // tag before the current crumb
-    $after = '</span>'; // tag after the current crumb
+    $showOnHome = 0; 
+    $delimiter = '&raquo;'; 
+    $home = '<img src="' . get_template_directory_uri() . '/inc/icons/home_bc_link.svg">'; 
+    $showCurrent = 1;
+    $before = '<span class="current">'; 
+    $after = '</span>'; 
     global $post;
     $homeLink = home_url();
     if (is_home() || is_front_page())
@@ -386,6 +363,12 @@ function the_breadcrumb()
 }
 
 /**
+ * Author Box
+ */
+
+ require get_template_directory() . '/template-parts/authorbox.php';
+
+/**
  * Sanitizing
  */
 function zonic_sanitize_file($file, $setting)
@@ -420,3 +403,27 @@ function smarthub_sanitize_color($color)
     return 'rgba(' . $red . ',' . $green . ',' . $blue . ',' . $alpha . ')';
 }
 
+//checkbox sanitization function
+function shm_sanitize_checkbox( $input ){
+              
+    //returns true if checkbox is checked
+    return ( isset( $input ) ? true : false );
+}
+
+// Elementor
+
+function zonic_register_elementor_locations( $elementor_theme_manager ) {
+
+	$elementor_theme_manager->register_location( 'header' );
+	$elementor_theme_manager->register_location( 'footer' );
+	$elementor_theme_manager->register_location( 'single' );
+	$elementor_theme_manager->register_location( 'archive' );
+
+}
+add_action( 'elementor/theme/register_locations', 'zonic_register_elementor_locations' );
+
+// Updater
+
+add_action( 'after_setup_theme', function() {
+    get_template_part( 'inc/classes/Updater' );
+});

@@ -5,51 +5,36 @@
  * @package zonic
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 get_header();
 ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
 			<div class="container">
+			<div class="col shm-left-col span_3_of_4">
 			<section class="error-404 not-found">
 				<header class="page-header">
 					<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'zonic' ); ?></h1>
 				</header><!-- .page-header -->
 
 				<div class="page-content">
-					<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'zonic' ); ?></p>
+					<p><?php esc_html_e( 'We are sorry. But the page you are looking for is not available. Perhaps you can try a new search.', 'zonic' ); ?></p>
 
-					<?php
-					get_search_form();
-
-					the_widget( 'WP_Widget_Recent_Posts' );
-					?>
-
-					<div class="widget widget_categories">
-						<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'zonic' ); ?></h2>
-						<ul>
-							<?php
-							wp_list_categories( array(
-								'orderby'    => 'count',
-								'order'      => 'DESC',
-								'show_count' => 1,
-								'title_li'   => '',
-								'number'     => 10,
-							));
-							?>
-						</ul>
-					</div><!-- .widget -->
-
-					<?php
-					/* translators: %1$s: smiley */
-					$zonic_archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'zonic' ), convert_smilies( ':)' ) ) . '</p>';
-					the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$zonic_archive_content" );
-
-					the_widget( 'WP_Widget_Tag_Cloud' );
-					?>
+					<a class="z-backto-home" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Back To Homepage', 'zonic' ) ?></a>
 
 				</div><!-- .page-content -->
 			</section><!-- .error-404 -->
+			</div> <!-- .shm-left-col -->
+
+			<div class="col shm-right-col span_1_of_4">
+				<?php get_sidebar(); ?>
+			</div><!-- .shm-right-col -->
+			
 			</div><!-- .container -->
 		</main><!-- #main -->
 	</div><!-- #primary -->

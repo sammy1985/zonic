@@ -1,4 +1,10 @@
 <?php
+
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 		while ( have_posts() ) :
 			the_post(); ?>
 

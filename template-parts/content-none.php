@@ -5,6 +5,10 @@
  * @package zonic
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 ?>
 
 <section class="no-results not-found">

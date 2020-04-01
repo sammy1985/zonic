@@ -7,6 +7,11 @@
  * @package zonic
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} 
+
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -28,7 +33,10 @@
     get_template_part('inc/top', 'bar');
 } ?>
 
-	<?php if (get_theme_mod('site_header_style') === 'default')
+<?php 
+
+if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_location( 'header' ) ) {
+	if (get_theme_mod('site_header_style') === 'default')
 {
     get_template_part('layouts/default', 'header');
 }
@@ -39,16 +47,9 @@ elseif (get_theme_mod('site_header_style') === 'center')
 else
 {
     get_template_part('layouts/default', 'header');
-} ?>
+} 
+}
+
+?>
 
 	<div id="content" class="site-content">
-
-	<?php if (get_theme_mod('show_breadcrumbs') == 'show') { ?>
-		<div class="breadcrumbs-wrapper">
-				<div class="shm-breadcrumbs container">
-				<?php if (function_exists('the_breadcrumb')){
-					the_breadcrumb();
-				} ?>
-				</div><!-- .shm-breadcrumbs -->
-		</div><!-- .breadcrumbs-wrapper -->
-	<?php } ?>

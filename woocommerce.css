@@ -15,6 +15,32 @@ WooCommerce styles override
 /**
  * Shop tables
  */
+
+
+/* Breadcrumbs */
+
+nav.woocommerce-breadcrumb {
+    font-size: 90%;
+    background: #f7f7f7;
+    padding: 6px 10px;
+    display: inline-block;
+	float: right;
+}
+
+ /* Shop page */
+
+ span.onsale {
+    position: absolute;
+    background-color: #0075fe;
+    padding: 10px 15px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+h1.woocommerce-products-header__title.page-title {
+    font-size: 2em;
+}
+
 table.shop_table_responsive thead {
 	display: none;
 }
@@ -475,7 +501,10 @@ p.no-comments {
 .woocommerce-info,
 .woocommerce-noreviews,
 p.no-comments {
-	background-color: #3D9CD2;
+	background-color: #f7f7f7;
+    padding: 7px 10px;
+    margin: 10px 0;
+    font-size: 90%;
 }
 
 .woocommerce-error {
@@ -489,8 +518,15 @@ p.no-comments {
 	right: 0;
 	margin: 0;
 	padding: 1em;
-	background-color: #3D9CD2;
+	background-color: #0075FE;
+	color: #ffffff;
 	z-index: 9999;
+}
+
+.woocommerce-store-notice__dismiss-link {
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 5px 17px;
 }
 
 @media screen and (min-width: 48em) {

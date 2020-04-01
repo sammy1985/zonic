@@ -5,6 +5,11 @@
  * @package zonic
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} 
+
 get_header();
 ?>
 
@@ -19,7 +24,7 @@ get_header();
 				<h1 class="page-title">
 					<?php
     /* translators: %s: search query. */
-    printf(esc_html__('Search Results for: %s', 'zonic') , '<span>' . get_search_query() . '</span>');
+    printf(wp_kses_post(__('<span class="icon-search"></span> Search Results for: %s', 'zonic')) , '<span>' . get_search_query() . '</span>');
 ?>
 				</h1>
 			</header><!-- .page-header -->

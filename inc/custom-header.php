@@ -9,6 +9,13 @@
  *
  * @uses zonic_header_style()
  */
+
+ // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+
 function zonic_custom_header_setup() {
 	add_theme_support( 'custom-header', apply_filters( 'zonic_custom_header_args', array(
 		'default-image'          => '',

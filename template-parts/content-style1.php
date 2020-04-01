@@ -5,6 +5,10 @@
  * @package zonic
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} 
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('post-style1'); ?>>

@@ -1,5 +1,10 @@
 <?php
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( ! function_exists( 'zonic_posted_on' ) ) :
 	/**
 	 * Prints HTML with meta information for the current post-date/time.
@@ -59,15 +64,18 @@ if ( ! function_exists( 'zonic_entry_footer' ) ) :
 			}
 
 			/* translators: used between list items, there is a space after the comma */
-			$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'zonic' ) );
+			if(get_theme_mod('tags_on_posts') == 0) {
+				$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'zonic' ) );
 			if ( $tags_list ) {
 				/* translators: 1: list of tags. */
 				printf( '<span class="tags-links">' . wp_kses_post( '<span class="icon-tag"></span> %1$s', 'zonic' ) . '</span>', $tags_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
+			}
+			
 		}
 
 		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
-			echo '<span class="comments-link">';
+			echo '<span class="icon-message-square"></span> <span class="comments-link">';
 			comments_popup_link(
 				sprintf(
 					wp_kses(

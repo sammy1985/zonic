@@ -1,3 +1,11 @@
+<?php
+
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
+
 <div class="top-bar-wrapper">
 			<div class="container top-bar">
 			<div class="section group">

@@ -1,3 +1,10 @@
+<?php 
+
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
+
 <header id="masthead" class="site-header-center">
 		<div class="container">
 			<div class="section group">

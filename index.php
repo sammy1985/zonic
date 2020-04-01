@@ -4,33 +4,55 @@
  * @package zonic
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 get_header();
 ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
+				<?php 
+					if (is_home()):
+						if(get_theme_mod('home_page_sc_display') === 'cover'):
+							if (get_theme_mod('homepage_shortcode_area')): ?>
+								<div class="home-shorcode-cover">
+									<?php get_template_part('template-parts/zonic', 'cover'); ?>
+								</div> <?php 
+							endif;
+						endif;
+					endif; 
+				?>
 			<div class="container">
 			<div class="section group">
 				<div class="col shm-left-col span_3_of_4">
-				<?php
+				
+					<?php 
+					if (is_home()):
+						if(get_theme_mod('home_page_sc_display') === 'default'):
+							if (get_theme_mod('homepage_shortcode_area')): ?>
+								<div class="home-shorcode-area">
+									<?php echo do_shortcode(get_theme_mod('homepage_shortcode_area')); ?>
+								</div>
+							<?php endif;
+						endif;
+					endif; 
 
-if (is_home()):
-    if (get_theme_mod('show_fe_section') == 'show'):
-        get_template_part('template-parts/featured', 'post');
-    endif;
-endif;
+				if (is_home()):
+    				if (get_theme_mod('show_fe_section') == 'show'):
+        			get_template_part('template-parts/featured', 'post');
+    				endif;
+				endif;
 
-if (have_posts()):
-
-    if (is_home() && !is_front_page()):
-?>
+		if (have_posts()):
+		if (is_home() && !is_front_page()): ?>
 				<header>
 					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-					
 				</header>
 				
-				<?php
-    endif;
+		<?php endif;
 
     /* Start the Loop */
     while (have_posts()):
@@ -59,7 +81,7 @@ endif;
 ?>
 				</div><!-- .span_3_of_4 -->
 
-				<div class="col shm-left-col span_1_of_4">
+				<div class="col shm-right-col span_1_of_4">
 					<?php get_sidebar(); ?>
 				</div><!-- .span_1_of_4 -->
 			</div><!-- .section -->
